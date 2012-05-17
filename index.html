@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HTML5 Video Player with Variable Playback Speed</title>
+  </head>
+  <body>
+    <section class="player">
+      <div class="url">
+        <label for="url"></label>
+	<input type="url" id="url" placeholder="Enter the URL of the
+	video you wish to watch" />
+	<button id="select-video">Get</button>
+      </div>
+      <div class="player">
+	<video id="player" controls="controls" height="150px"
+	width="200px">
+	  <source
+	src="http://upload.wikimedia.org/wikipedia/commons/0/07/Backgammon_example.ogv"
+	/>
+	  <div>Sorry, your browser does not support HTML5 video.</div>
+	</video>
+      </div>
+      <div class="controls">
+	<div class="speeds row">
+	  <label for="speed-1.0">Normal</label>
+	  <input id="speed-1.0" type="radio" class="speed" name="speed" value="1.0" checked="checked"/>
+	  <label for="speed-1.2">x1.2</label>
+	  <input id="speed-1.2"type="radio" class="speed" name="speed" value="1.2" />
+	  <label for="speed-1.5">x1.5</label>
+	  <input id="speed-1.5" type="radio" class="speed" name="speed" value="1.5" />
+	</div>
+      </div>
+    </section>
+    <script>
+      (function(){
+        function selectSpeed(e) {
+          var evnt = e;
+          document.getElementById('player').playbackRate = e.srcElement.value;          
+        }
+
+        var speeds = document.getElementsByClassName("speed"),
+            i = 0, n = speeds.length;
+        for (; i < n; ++i) {
+          speeds[i].addEventListener('click', selectSpeed, true);
+        }
+
+        document.getElementById("select-video").addEventListener('click',
+          function(e) {
+            document.getElementById("player").src = document.getElementById('url').value;
+          }, true);
+      }());
+    </script>
+  </body>
+</html>
